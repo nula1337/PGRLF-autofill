@@ -35,7 +35,7 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
 
-        web.get("https://zadost.pgrlf.cz/Form/InvesticniUverZemedelecTiket")
+        web.get("https://zadost.pgrlf.cz/Form/ZpracovatelDreva")
 
         time.sleep(1)
 
@@ -371,5 +371,125 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
 
         except:
             print("Podpis - de minimis nebyl zvolen")
+
+        try:
+            UverInvesticni_VyseUveru = web.find_element_by_name(
+                "UverInvesticni.VyseUveru"
+            )
+            UverInvesticni_VyseUveru.send_keys(data[55])
+
+        except:
+            print("Úvěr investiční - výše úvěru nebyla vyplněna")
+
+        try:
+            UverInvesticni_DobaSplatnosti = web.find_element_by_name(
+                "UverInvesticni.DobaSplatnosti"
+            )
+            UverInvesticni_DobaSplatnosti.send_keys(data[56])
+
+        except:
+            print("Úvěr investiční - doba splatnosti nebyla vyplněna")
+
+        try:
+            UverInvesticni_OdkladSplatky = web.find_element_by_name(
+                "UverInvesticni.OdkladSplatky"
+            )
+            UverInvesticni_OdkladSplatky.send_keys(data[57])
+
+        except:
+            print("Úvěr investiční - odklad splátky nebyl vyplněn")
+
+        try:
+            UverInvesticni_ZduvodneniOdkladuInvesticni = web.find_element_by_name(
+                "UverInvesticni.ZduvodneniOdkladuInvesticni"
+            )
+            UverInvesticni_ZduvodneniOdkladuInvesticni.send_keys(data[58])
+
+        except:
+            print("Úvěr investiční - zdůvodnění odkladu splátky nebylo vyplněno")
+
+        try:
+            if data[59] == "Ne":
+                jeSnizeni = web.find_element_by_name("jeSnizeni")
+                jeSnizeni.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Snížení jistiny nebylo zvoleno")
+
+        try:
+            if data[60] == "Ano":
+                jeZacinajici = web.find_element_by_name("jeZacinajici")
+                jeZacinajici.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Začínající podnikatel nebyl zvolen")
+
+        # TEST PROMĚNNÝCH
+        # print(" ")
+        # print("----------------------------------------")
+        # print("TEST PROMĚNNÝCH")
+        # print("----------------------------------------")
+        # print(" ")
+        # print("ObchodniJmeno: ", data[0])
+        # print("TypPO: ", data[1])
+        # print("Plátce DPH: ", data[2])
+        # print("IČ: ", data[3])
+        # print("DIČ: ", data[4])
+        # print("SidloSpolecnosti.Ulice: ", data[5])
+        # print("SidloSpolecnosti.CisloPopisne: ", data[6])
+        # print("SidloSpolecnosti.CisloOrientacni: ", data[7])
+        # print("SidloSpolecnosti.Obec: ", data[8])
+        # print("SidloSpolecnosti.PSC: ", data[9])
+        # print("SidloSpolecnosti.Kraj: ", data[10])
+        # print("JeMistoPodnikaniStejne: ", data[11])
+        # print("MistoPodnikani.Ulice: ", data[12])
+        # print("MistoPodnikani.CisloPopisne: ", data[13])
+        # print("MistoPodnikani.CisloOrientacni: ", data[14])
+        # print("MistoPodnikani.Obec: ", data[15])
+        # print("MistoPodnikani.PSC: ", data[16])
+        # print("MistoPodnikani.Kraj: ", data[17])
+        # print("ZodpovednaOsobaList.FunkceVSpolecnosti: ", data[18])
+        # print("ZodpovednaOsobaList.TitulPredJmenem: ", data[19])
+        # print("ZodpovednaOsobaList.TitulZaJmenem: ", data[20])
+        # print("ZodpovednaOsobaList.Jmeno: ", data[21])
+        # print("ZodpovednaOsobaList.Prijmeni: ", data[22])
+        # print("ZodpovednaOsobaList.FunkceVSpolecnosti2: ", data[23])
+        # print("ZodpovednaOsobaList.TitulPredJmenem2: ", data[24])
+        # print("ZodpovednaOsobaList.TitulZaJmenem2: ", data[25])
+        # print("ZodpovednaOsobaList.Jmeno2: ", data[26])
+        # print("ZodpovednaOsobaList.Prijmeni2: ", data[27])
+        # print("ZodpovednaOsobaList.FunkceVSpolecnosti3: ", data[28])
+        # print("ZodpovednaOsobaList.TitulPredJmenem3: ", data[29])
+        # print("ZodpovednaOsobaList.TitulZaJmenem3: ", data[30])
+        # print("ZodpovednaOsobaList.Jmeno3: ", data[31])
+        # print("ZodpovednaOsobaList.Prijmeni3: ", data[32])
+        # print("ZodpovednaOsobaList.FunkceVSpolecnosti4: ", data[33])
+        # print("ZodpovednaOsobaList.TitulPredJmenem4: ", data[34])
+        # print("ZodpovednaOsobaList.TitulZaJmenem4: ", data[35])
+        # print("ZodpovednaOsobaList.Jmeno4: ", data[36])
+        # print("ZodpovednaOsobaList.Prijmeni4: ", data[37])
+        # print("ZodpovednaOsobaList.FunkceVSpolecnosti5: ", data[38])
+        # print("ZodpovednaOsobaList.TitulPredJmenem5: ", data[39])
+        # print("ZodpovednaOsobaList.TitulZaJmenem5: ", data[40])
+        # print("ZodpovednaOsobaList.Jmeno5: ", data[41])
+        # print("ZodpovednaOsobaList.Prijmeni5: ", data[42])
+        # print("Kontakt.Telefon1: ", data[43])
+        # print("Kontakt.Telefon2: ", data[44])
+        # print("Kontakt.Email: ", data[45])
+        # print("BankovniSpojeni.CisloUctu: ", data[46])
+        # print("BankovniSpojeni.KodBanky: ", data[47])
+        # print("ObchodniRejstrikFyzicka.ORZapis: ", data[48])
+        # print("ObchodniRejstrikFyzicka.ORVydal: ", data[49])
+        # print("ObchodniRejstrikFyzicka.ORDatum: ", data[50])
+        # print("PlanovaneUkonceni.UkonceniCinnosti: ", data[51])
+        # print("PlanovaneUkonceni.UkonceniCinnostiDatum: ", data[52])
+        # print("PlanovanyProdej.ProdejPodniku: ", data[53])
+        # print("PlanovanyProdej.ProdejPodnikuDatum: ", data[54])
+        # print("UverInvesticni.VyseUveru: ", data[55])
+        # print("UverInvesticni.DobaSplatnosti: ", data[56])
+        # print("UverInvesticni.OdkladSplatky: ", data[57])
+        # print("UverInvesticni.ZduvodneniOdkladuInvesticni: ", data[58])
+        # print("jeSnizeni: ", data[59])
+        # print("jeZacinajici: ", data[60])
 
         time.sleep(3600)

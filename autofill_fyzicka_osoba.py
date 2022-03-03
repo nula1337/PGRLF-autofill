@@ -91,8 +91,9 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             print("IČ nebylo vyplněno")
 
         try:
-            DIC = web.find_element_by_name("FyzickaOsoba.DIC")
-            DIC.send_keys(data[6])
+            if data[4] == "Ano":
+                DIC = web.find_element_by_name("FyzickaOsoba.DIC")
+                DIC.send_keys(data[6])
 
         except:
             print("DIČ nebylo vyplněno")
@@ -136,7 +137,7 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             TrvalyPobyt_CisloOrientacni.send_keys(data[11])
 
         except:
-            print("Trvalž pobyt - číslo orientační nebylo vyplněno")
+            print("Trvalý pobyt - číslo orientační nebylo vyplněno")
 
         try:
             TrvalyPobyt_Obec = web.find_element_by_name("FyzickaOsoba.TrvalyPobyt.Obec")
@@ -282,7 +283,7 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             ObchodniRejstrikFyzicka_ORVydal.send_keys(data[28])
 
         except:
-            print("Obchodní rejstřík - příslušný krajský soud nebyl vyplněnen")
+            print("Obchodní rejstřík - příslušný krajský soud nebyl vyplněn")
 
         try:
             ObchodniRejstrikFyzicka_ORDatum = web.find_element_by_name(
@@ -350,5 +351,104 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
 
         except:
             print("Podpis - de minimis nebyl zvolen")
+
+        try:
+            UverInvesticni_VyseUveru = web.find_element_by_name(
+                "UverInvesticni.VyseUveru"
+            )
+            UverInvesticni_VyseUveru.send_keys(data[34])
+
+        except:
+            print("Úvěr investiční - výše úvěru nebyla vyplněna")
+
+        try:
+            UverInvesticni_DobaSplatnosti = web.find_element_by_name(
+                "UverInvesticni.DobaSplatnosti"
+            )
+            UverInvesticni_DobaSplatnosti.send_keys(data[35])
+
+        except:
+            print("Úvěr investiční - doba splatnosti nebyla vyplněna")
+
+        try:
+            UverInvesticni_OdkladSplatky = web.find_element_by_name(
+                "UverInvesticni.OdkladSplatky"
+            )
+            UverInvesticni_OdkladSplatky.send_keys(data[36])
+
+        except:
+            print("Úvěr investiční - odklad splátky nebyl vyplněn")
+
+        try:
+            UverInvesticni_ZduvodneniOdkladuInvesticni = web.find_element_by_name(
+                "UverInvesticni.ZduvodneniOdkladuInvesticni"
+            )
+            UverInvesticni_ZduvodneniOdkladuInvesticni.send_keys(data[37])
+
+        except:
+            print("Úvěr investiční - zdůvodnění odkladu splátky nebylo vyplněno")
+
+        try:
+            if data[38] == "Ne":
+                jeSnizeni = web.find_element_by_name("jeSnizeni")
+                jeSnizeni.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Snížení jistiny nebylo zvoleno")
+
+        try:
+            if data[39] == "Ano":
+                jeZacinajici = web.find_element_by_name("jeZacinajici")
+                jeZacinajici.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Začínající podnikatel nebyl zvolen")
+
+        # TEST PROMĚNNÝCH
+        #print(" ")
+        #print("----------------------------------------")
+        #print("TEST PROMĚNNÝCH")
+        #print("----------------------------------------")
+        #print(" ")
+        #print("Titul před jménem: ", data[0])
+        #print("Jméno: ", data[1])
+        #print("Příjmení: ", data[2])
+        #print("Titul za jménem: ", data[3])
+        #print("Plátce DPH: ", data[4])
+        #print("IČ: ", data[5])
+        #print("DIČ: ", data[6])
+        #print("Rodné číslo: ", data[7])
+        #print("Datum narození: ", data[8])
+        #print("Trvaly pobyt - ulice: ", data[9])
+        #print("Trvaly pobyt - ČP: ", data[10])
+        #print("Trvaly pobyt - ČO: ", data[11])
+        #print("Trvaly pobyt - obec: ", data[12])
+        #print("Trvaly pobyt - PSČ: ", data[13])
+        #print("Trvaly pobyt - kraj: ", data[14])
+        #print("JeMistoPodnikaniStejne: ", data[15])
+        #print("MistoPodnikani.Ulice: ", data[16])
+        #print("MistoPodnikani.CisloPopisne: ", data[17])
+        #print("MistoPodnikani.CisloOrientacni: ", data[18])
+        #print("MistoPodnikani.Obec: ", data[19])
+        #print("MistoPodnikani.PSC: ", data[20])
+        #print("MistoPodnikani.Kraj: ", data[21])
+        #print("Kontakt.Telefon1: ", data[22])
+        #print("Kontakt.Telefon2: ", data[23])
+        #print("Kontakt.Email: ", data[24])
+        #print("BankovniSpojeni.CisloUctu: ", data[25])
+        #print("BankovniSpojeni.KodBanky: ", data[26])
+        #print("ObchodniRejstrikFyzicka.ORZapis: ", data[27])
+        #print("ObchodniRejstrikFyzicka.ORVydal: ", data[28])
+        #print("ObchodniRejstrikFyzicka.ORDatum: ", data[29])
+        #print("PlanovaneUkonceni.UkonceniCinnosti: ", data[30])
+        #print("PlanovaneUkonceni.UkonceniCinnostiDatum: ", data[31])
+        #print("PlanovanyProdej.ProdejPodniku: ", data[32])
+        #print("PlanovanyProdej.ProdejPodnikuDatum: ", data[33])
+        #print("UverInvesticni.VyseUveru: ", data[34])
+        #print("UverInvesticni.DobaSplatnosti: ", data[35])
+        #print("UverInvesticni.OdkladSplatky: ", data[36])
+        #print("UverInvesticni.ZduvodneniOdkladuInvesticni: ", data[37])
+        #print("jeSnizeni: ", data[38])
+        #print("jeZacinajici: ", data[39])
 
         time.sleep(3600)
