@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 from os import path
+import os
 import time
 import csv
 import subprocess
@@ -35,7 +36,12 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
 
-        web.get("https://zadost.pgrlf.cz/Form/ZpracovatelDreva")
+        web.get(
+            "file://"
+            + os.path.dirname(os.path.realpath(__file__))
+            + "\Zkušební_formulář_PGLRF.html"
+        )  # Zde nakopírovat URL stránky (https://zadost.pgrlf.cz/Form/InvesticniUverZemedelecTiket)
+        # TESTOVACÍ DIR: "file://" + os.path.dirname(os.path.realpath(__file__)) + "\Zkušební_formulář_PGLRF.html"
 
         time.sleep(1)
 
@@ -229,21 +235,21 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             print("Místo podníkání je stejné nebylo zvoleno")
 
         try:
-            Kontakt_Telefon1 = web.find_element_by_name("Kontakt.Telefon1")
+            Kontakt_Telefon1 = web.find_element_by_name("Kontakt4.Telefon1")
             Kontakt_Telefon1.send_keys(data[22])
 
         except:
             print("Kontakt - hlavní telefon nebyl vyplněn")
 
         try:
-            Kontakt_Telefon2 = web.find_element_by_name("Kontakt.Telefon2")
+            Kontakt_Telefon2 = web.find_element_by_name("Kontakt4.Telefon2")
             Kontakt_Telefon2.send_keys(data[23])
 
         except:
             print("Kontakt - vedlejší telefon nebyl vyplněn")
 
         try:
-            Kontakt_Email = web.find_element_by_name("Kontakt.Email")
+            Kontakt_Email = web.find_element_by_name("Kontakt4.Email")
             Kontakt_Email.send_keys(data[24])
 
         except:
@@ -404,51 +410,58 @@ with open("data_fyzicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
         except:
             print("Začínající podnikatel nebyl zvolen")
 
+        try:
+            CestneProhlaseniTicket = web.find_element_by_name("CestneProhlaseniTicket")
+            CestneProhlaseniTicket.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Čestné prohlášení nebylo zvoleno")
+
         # TEST PROMĚNNÝCH
-        #print(" ")
-        #print("----------------------------------------")
-        #print("TEST PROMĚNNÝCH")
-        #print("----------------------------------------")
-        #print(" ")
-        #print("Titul před jménem: ", data[0])
-        #print("Jméno: ", data[1])
-        #print("Příjmení: ", data[2])
-        #print("Titul za jménem: ", data[3])
-        #print("Plátce DPH: ", data[4])
-        #print("IČ: ", data[5])
-        #print("DIČ: ", data[6])
-        #print("Rodné číslo: ", data[7])
-        #print("Datum narození: ", data[8])
-        #print("Trvaly pobyt - ulice: ", data[9])
-        #print("Trvaly pobyt - ČP: ", data[10])
-        #print("Trvaly pobyt - ČO: ", data[11])
-        #print("Trvaly pobyt - obec: ", data[12])
-        #print("Trvaly pobyt - PSČ: ", data[13])
-        #print("Trvaly pobyt - kraj: ", data[14])
-        #print("JeMistoPodnikaniStejne: ", data[15])
-        #print("MistoPodnikani.Ulice: ", data[16])
-        #print("MistoPodnikani.CisloPopisne: ", data[17])
-        #print("MistoPodnikani.CisloOrientacni: ", data[18])
-        #print("MistoPodnikani.Obec: ", data[19])
-        #print("MistoPodnikani.PSC: ", data[20])
-        #print("MistoPodnikani.Kraj: ", data[21])
-        #print("Kontakt.Telefon1: ", data[22])
-        #print("Kontakt.Telefon2: ", data[23])
-        #print("Kontakt.Email: ", data[24])
-        #print("BankovniSpojeni.CisloUctu: ", data[25])
-        #print("BankovniSpojeni.KodBanky: ", data[26])
-        #print("ObchodniRejstrikFyzicka.ORZapis: ", data[27])
-        #print("ObchodniRejstrikFyzicka.ORVydal: ", data[28])
-        #print("ObchodniRejstrikFyzicka.ORDatum: ", data[29])
-        #print("PlanovaneUkonceni.UkonceniCinnosti: ", data[30])
-        #print("PlanovaneUkonceni.UkonceniCinnostiDatum: ", data[31])
-        #print("PlanovanyProdej.ProdejPodniku: ", data[32])
-        #print("PlanovanyProdej.ProdejPodnikuDatum: ", data[33])
-        #print("UverInvesticni.VyseUveru: ", data[34])
-        #print("UverInvesticni.DobaSplatnosti: ", data[35])
-        #print("UverInvesticni.OdkladSplatky: ", data[36])
-        #print("UverInvesticni.ZduvodneniOdkladuInvesticni: ", data[37])
-        #print("jeSnizeni: ", data[38])
-        #print("jeZacinajici: ", data[39])
+        # print(" ")
+        # print("----------------------------------------")
+        # print("TEST PROMĚNNÝCH")
+        # print("----------------------------------------")
+        # print(" ")
+        # print("Titul před jménem: ", data[0])
+        # print("Jméno: ", data[1])
+        # print("Příjmení: ", data[2])
+        # print("Titul za jménem: ", data[3])
+        # print("Plátce DPH: ", data[4])
+        # print("IČ: ", data[5])
+        # print("DIČ: ", data[6])
+        # print("Rodné číslo: ", data[7])
+        # print("Datum narození: ", data[8])
+        # print("Trvaly pobyt - ulice: ", data[9])
+        # print("Trvaly pobyt - ČP: ", data[10])
+        # print("Trvaly pobyt - ČO: ", data[11])
+        # print("Trvaly pobyt - obec: ", data[12])
+        # print("Trvaly pobyt - PSČ: ", data[13])
+        # print("Trvaly pobyt - kraj: ", data[14])
+        # print("JeMistoPodnikaniStejne: ", data[15])
+        # print("MistoPodnikani.Ulice: ", data[16])
+        # print("MistoPodnikani.CisloPopisne: ", data[17])
+        # print("MistoPodnikani.CisloOrientacni: ", data[18])
+        # print("MistoPodnikani.Obec: ", data[19])
+        # print("MistoPodnikani.PSC: ", data[20])
+        # print("MistoPodnikani.Kraj: ", data[21])
+        # print("Kontakt4.Telefon1: ", data[22])
+        # print("Kontakt4.Telefon2: ", data[23])
+        # print("Kontakt4.Email: ", data[24])
+        # print("BankovniSpojeni.CisloUctu: ", data[25])
+        # print("BankovniSpojeni.KodBanky: ", data[26])
+        # print("ObchodniRejstrikFyzicka.ORZapis: ", data[27])
+        # print("ObchodniRejstrikFyzicka.ORVydal: ", data[28])
+        # print("ObchodniRejstrikFyzicka.ORDatum: ", data[29])
+        # print("PlanovaneUkonceni.UkonceniCinnosti: ", data[30])
+        # print("PlanovaneUkonceni.UkonceniCinnostiDatum: ", data[31])
+        # print("PlanovanyProdej.ProdejPodniku: ", data[32])
+        # print("PlanovanyProdej.ProdejPodnikuDatum: ", data[33])
+        # print("UverInvesticni.VyseUveru: ", data[34])
+        # print("UverInvesticni.DobaSplatnosti: ", data[35])
+        # print("UverInvesticni.OdkladSplatky: ", data[36])
+        # print("UverInvesticni.ZduvodneniOdkladuInvesticni: ", data[37])
+        # print("jeSnizeni: ", data[38])
+        # print("jeZacinajici: ", data[39])
 
         time.sleep(3600)

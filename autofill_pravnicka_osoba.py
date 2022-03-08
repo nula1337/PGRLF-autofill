@@ -35,7 +35,7 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
 
-        web.get("https://zadost.pgrlf.cz/Form/ZpracovatelDreva")
+        web.get("https://zadost.pgrlf.cz/Form/InvesticniUverZemedelecTiket")
 
         time.sleep(1)
 
@@ -249,21 +249,21 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             print("Zodpovědná osoba - příjmení nebylo vyplněno")
 
         try:
-            Kontakt_Telefon1 = web.find_element_by_name("Kontakt.Telefon1")
+            Kontakt_Telefon1 = web.find_element_by_name("Kontakt4.Telefon1")
             Kontakt_Telefon1.send_keys(data[43])
 
         except:
             print("Kontakt - hlavní telefon nebyl vyplněn")
 
         try:
-            Kontakt_Telefon2 = web.find_element_by_name("Kontakt.Telefon2")
+            Kontakt_Telefon2 = web.find_element_by_name("Kontakt4.Telefon2")
             Kontakt_Telefon2.send_keys(data[44])
 
         except:
             print("Kontakt - vedlejší telefon nebyl vyplněn")
 
         try:
-            Kontakt_Email = web.find_element_by_name("Kontakt.Email")
+            Kontakt_Email = web.find_element_by_name("Kontakt4.Email")
             Kontakt_Email.send_keys(data[45])
 
         except:
@@ -424,6 +424,13 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
         except:
             print("Začínající podnikatel nebyl zvolen")
 
+        try:
+            CestneProhlaseniTicket = web.find_element_by_name("CestneProhlaseniTicket")
+            CestneProhlaseniTicket.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Čestné prohlášení nebylo zvoleno")
+
         # TEST PROMĚNNÝCH
         # print(" ")
         # print("----------------------------------------")
@@ -473,9 +480,9 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
         # print("ZodpovednaOsobaList.TitulZaJmenem5: ", data[40])
         # print("ZodpovednaOsobaList.Jmeno5: ", data[41])
         # print("ZodpovednaOsobaList.Prijmeni5: ", data[42])
-        # print("Kontakt.Telefon1: ", data[43])
-        # print("Kontakt.Telefon2: ", data[44])
-        # print("Kontakt.Email: ", data[45])
+        # print("Kontakt4.Telefon1: ", data[43])
+        # print("Kontakt4.Telefon2: ", data[44])
+        # print("Kontakt4.Email: ", data[45])
         # print("BankovniSpojeni.CisloUctu: ", data[46])
         # print("BankovniSpojeni.KodBanky: ", data[47])
         # print("ObchodniRejstrikFyzicka.ORZapis: ", data[48])
