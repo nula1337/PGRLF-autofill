@@ -7,21 +7,21 @@ import csv
 import subprocess
 
 # Setup
-with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
+with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj: # Otevření csv souboru data_fyzicka_osoba.csv, nastavení kódování UTF-8
     csv_reader = csv.reader(csv_zdroj, delimiter=";")
 
     # Vyplnění formuláře
     next(csv_reader, None)
 
     for data in csv_reader:
-        chrome_options = webdriver.ChromeOptions()
+        chrome_options = webdriver.ChromeOptions() # Nastavení Google Chrome, aby reCaptcha nepoznala, že formulář vyplňuje robot
         chrome_options.add_argument("start-maximized")
         chrome_options.add_argument("--disable-blink-features")
         chrome_options.add_argument("--disable-blink-features=AutomationControlled")
         chrome_options.add_experimental_option("useAutomationExtension", False)
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         web = webdriver.Chrome(
-            executable_path="C:/Autofill/chromedriver.exe", options=chrome_options
+            executable_path="C:/Autofill/chromedriver.exe", options=chrome_options # Umístění chromedriveru a nastavení Google Chrome, ke stažení: https://chromedriver.chromium.org/downloads, musí se shodovat s aktuálně nainstalovanou verzí Google Chrome
         )
 
         web.execute_cdp_cmd(
@@ -35,21 +35,23 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
 
-        web.get("https://zadost.pgrlf.cz/Form/InvesticniUverZemedelecTiket")
+        web.get(data[63]) # Otevření webové stránky, zdroj -> z CSV souboru
+        # Zde nakopírovat URL stránky (https://zadost.pgrlf.cz/Form/InvesticniUverZemedelecTiket), (https://zadost.pgrlf.cz/Form/Provoz2022)
+        # TESTOVACÍ DIR: "file://" + os.path.dirname(os.path.realpath(__file__)) + "\Zkušební_formulář_PGLRF.html"
 
-        time.sleep(1)
+        time.sleep(1) # Uspání kódu po dobu jedné vteřiny -> aby se stihlo otevřít okno se stránkou
 
         try:
-            PravnickaOsoba = web.find_element_by_id("rbPravnickaOsoba")
-            if PravnickaOsoba.is_selected() == False:
-                PravnickaOsoba.send_keys(webdriver.common.keys.Keys.SPACE)
+            PravnickaOsoba = web.find_element_by_id("rbPravnickaOsoba") # Zkus najít HTML element s ID rbFyzickaOsoba
+            if PravnickaOsoba.is_selected() == False: # Pokud je element nezakliknutý
+                PravnickaOsoba.send_keys(webdriver.common.keys.Keys.SPACE) # Zmáčkni tlačítko (zakliknutí volby "Fyzická osoba")
 
         except:
-            print("Pravnická osoba nebyla zvolena")
+            print("Pravnická osoba nebyla zvolena") # Pokud nenajdeš element vrať "Fyzická osoba nebyla zvolena"
 
         try:
-            ObchodniJmeno = web.find_element_by_name("PravnickaOsoba.ObchodniJmeno")
-            ObchodniJmeno.send_keys(data[0])
+            ObchodniJmeno = web.find_element_by_name("PravnickaOsoba.ObchodniJmeno") # Zkus najít HTML element s názvem TitulPredJmenem
+            ObchodniJmeno.send_keys(data[0]) # Vypiš do formulářového pole data z CSV
 
         except:
             print("Obchodní jméno nebylo vyplněno")
@@ -253,6 +255,13 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             Kontakt_Telefon1.send_keys(data[43])
 
         except:
+            print("Kontakt4 - hlavní telefon nebyl vyplněn")
+
+        try:
+            Kontakt_Telefon1 = web.find_element_by_name("Kontakt.Telefon1")
+            Kontakt_Telefon1.send_keys(data[43])
+
+        except:
             print("Kontakt - hlavní telefon nebyl vyplněn")
 
         try:
@@ -260,10 +269,24 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
             Kontakt_Telefon2.send_keys(data[44])
 
         except:
+            print("Kontakt4 - vedlejší telefon nebyl vyplněn")
+
+        try:
+            Kontakt_Telefon2 = web.find_element_by_name("Kontakt.Telefon2")
+            Kontakt_Telefon2.send_keys(data[44])
+
+        except:
             print("Kontakt - vedlejší telefon nebyl vyplněn")
 
         try:
             Kontakt_Email = web.find_element_by_name("Kontakt4.Email")
+            Kontakt_Email.send_keys(data[45])
+
+        except:
+            print("Kontakt4 - email nebyl vyplněn")
+
+        try:
+            Kontakt_Email = web.find_element_by_name("Kontakt.Email")
             Kontakt_Email.send_keys(data[45])
 
         except:
@@ -430,6 +453,64 @@ with open("data_pravnicka_osoba.csv", "r", encoding="utf-8") as csv_zdroj:
 
         except:
             print("Čestné prohlášení nebylo zvoleno")
+
+        try:
+            PriruckaPP = web.find_element_by_name("PriruckaPP.PriruckaPP")
+            PriruckaPP.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Příručka pro podání žádosti nebyla zvolena")
+
+        try:
+            Kontakt_SouhlasSeZasilanim = web.find_element_by_name(
+                "Kontakt4.SouhlasSeZasilanim"
+            )
+            Kontakt_SouhlasSeZasilanim.send_keys("ANO")
+
+        except:
+            print("Kontakt4 - souhlas se zasíláním nebyl vyplněn")
+
+        try:
+            Kontakt_SouhlasSeZasilanim = web.find_element_by_name(
+                "Kontakt.SouhlasSeZasilanim"
+            )
+            Kontakt_SouhlasSeZasilanim.send_keys("ANO")
+
+        except:
+            print("Kontakt - souhlas se zasíláním nebyl vyplněn")
+
+        try:
+            Evidence_EvidenceU = web.find_element_by_name(
+                "Evidence.EvidenceU"
+            )
+            Evidence_EvidenceU.send_keys(data[61])
+
+        except:
+            print("U koho je podnikatel evidován nebylo vyplněno")
+
+        try:
+            Evidence_DatumVydaniEvidence = web.find_element_by_name(
+                "Evidence.DatumVydaniEvidence"
+            )
+            Evidence_DatumVydaniEvidence.send_keys(data[62])
+
+        except:
+            print("Datum vydání osvědčení nebylo vyplněno")
+
+        try:
+            ProhlaseniOPodporach_POPCestneProhlaseni = web.find_element_by_name("ProhlaseniOPodporach.POPCestneProhlaseni")
+            ProhlaseniOPodporach_POPCestneProhlaseni.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Čestné prohlášení nebylo zvoleno")
+
+        try:
+            VelikostPodnikuUver_jeMala = web.find_element_by_name("VelikostPodnikuUver.jeMala")
+            VelikostPodnikuUver_jeMala.send_keys(webdriver.common.keys.Keys.SPACE)
+
+        except:
+            print("Velikost podniku - malá nebylo zvoleno")
+        
 
         # TEST PROMĚNNÝCH
         # print(" ")

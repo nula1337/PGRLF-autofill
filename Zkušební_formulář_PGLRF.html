@@ -224,7 +224,130 @@
                     </label>
                 </div>
             </div>
+            <h2>Bankovní spojení</h2>
+            <div class="form-row">
+                <div class="form-group col">
+                    <div id="CU">
+                        <label for="BankovniSpojeni_CisloUctu"><span>Číslo účtu *</span></label>
+                        <input class="form-control text-box single-line" data-val="true"
+                            data-val-regex="Číslo účtu obsahuje nepovolené znaky nebo je ve špatném formátu"
+                            data-val-regex-pattern="(\d{1,6}\-)?\d{0,10}" data-val-required="Není vyplněno číslo účtu"
+                            id="CisloUctu" name="BankovniSpojeni.CisloUctu" type="text" value="">
+                        <span class="field-validation-valid" data-valmsg-for="BankovniSpojeni.CisloUctu"
+                            data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label for="BankovniSpojeni_KodBanky"><span>Kód banky *</span></label>
+                    <select data-val="true" data-val-required="Není zvolena banka" id="BankovniSpojeni_KodBanky"
+                        name="BankovniSpojeni.KodBanky">
+                        <option selected="selected" value=""></option>
+                        <option value="0">Komerční banka, a.s. (0100)</option>
+                        <option value="1">Československá obchodní banka, a.s. (0300)</option>
+                        <option value="2">MONETA Money Bank, a.s. (0600)</option>
+                        <option value="3">Česká národní banka (0710)</option>
+                        <option value="4">Česká spořitelna, a.s. (0800)</option>
+                        <option value="5">Fio banka, a.s. (2010)</option>
+                        <option value="6">MUFG Bank (Europe) N.V. Prague Branch (2020)</option>
+                        <option value="7">Československé úvěrní družstvo (2030)</option>
+                        <option value="8">Citfin, spořitelní družstvo (2060)</option>
+                        <option value="9">TRINITY BANK a.s. (2070)</option>
+                        <option value="10">Hypoteční banka, a.s. (2100)</option>
+                        <option value="11">Peněžní dům, spořitelní družstvo (2200)</option>
+                        <option value="12">Artesa, spořitelní družstvo (2220)</option>
+                        <option value="13">Poštová banka, a.s., pobočka Česká republika (2240)</option>
+                        <option value="14">Banka CREDITAS a.s. (2250)</option>
+                        <option value="15">NEY spořitelní družstvo (2260)</option>
+                        <option value="16">Podnikatelská družstevní záložna (2275)</option>
+                        <option value="17">Citibank Europe plc, organizační složka (2600)</option>
+                        <option value="18">UniCredit Bank Czech Republic and Slovakia, a.s. (2700)</option>
+                        <option value="19">Air Bank a.s. (3030)</option>
+                        <option value="20">BNP Paribas Personal Finance SA, odštěpný závod (3050)</option>
+                        <option value="21">PKO BP S.A., Czech Branch (3060)</option>
+                        <option value="22">ING Bank N.V. (3500)</option>
+                        <option value="23">Expobank CZ a.s. (4000)</option>
+                        <option value="24">Českomoravská záruční a rozvojová banka, a.s. (4300)</option>
+                        <option value="25">Raiffeisenbank a.s. (5500)</option>
+                        <option value="26">J &amp; T Banka, a.s. (5800)</option>
+                        <option value="27">PPF banka a.s. (6000)</option>
+                        <option value="28">Equa bank a.s. (6100)</option>
+                        <option value="29">COMMERZBANK Aktiengesellschaft, pobočka Praha (6200)</option>
+                        <option value="30">mBank S.A., organizační složka (6210)</option>
+                        <option value="31">BNP Paribas S.A., pobočka Česká republika (6300)</option>
+                        <option value="32">Všeobecná úverová banka a.s., pobočka Praha (6700)</option>
+                        <option value="33">Sberbank CZ, a.s. (6800)</option>
+                        <option value="34">Deutsche Bank Aktiengesellschaft Filiale Prag, organizační složka
+                            (7910)
+                        </option>
+                        <option value="35">Waldviertler Sparkasse Bank AG (7940)</option>
+                        <option value="36">Raiffeisen stavební spořitelna a.s. (7950)</option>
+                        <option value="37">Českomoravská stavební spořitelna, a.s. (7960)</option>
+                        <option value="38">Wüstenrot-stavební spořitelna a.s. (7970)</option>
+                        <option value="39">Wüstenrot hypoteční banka a.s. (7980)</option>
+                        <option value="40">Modrá pyramida stavební spořitelna, a.s. (7990)</option>
+                        <option value="41">Volksbank Raiffeisenbank Nordoberpfalz eG pobočka Cheb (8030)
+                        </option>
+                        <option value="42">Oberbank AG pobočka Česká republika (8040)</option>
+                        <option value="43">Stavební spořitelna České spořitelny, a.s. (8060)</option>
+                        <option value="44">Česká exportní banka, a.s. (8090)</option>
+                        <option value="45">HSBC France - pobočka Praha (8150)</option>
+                        <option value="46">PRIVAT BANK AG der Raiffeisenlandesbank Oberösterreich
+                            Aktiengesellschaft, pobočka Česká republika (8200)</option>
+                        <option value="47">ALTERNATIVE PAYMENT SOLUTIONS, s.r.o. (8215)</option>
+                        <option value="48">Payment Execution s.r.o. (8220)</option>
+                        <option value="49">ORANGETRUST s.r.o. (8225)</option>
+                        <option value="50">EEPAYS s.r.o. (8230)</option>
+                        <option value="51">Družstevní záložna Kredit (8240)</option>
+                        <option value="52">Bank of China (Hungary) Close Ltd. Prague branch, odštěpný závod
+                            (8250)
+                        </option>
+                        <option value="53">PAYMASTER a.s. (8260)</option>
+                        <option value="54">Industrial and Commercial Bank of China Limited Prague Branch,
+                            odštěpný
+                            závod (8265)</option>
+                        <option value="55">Fairplay Pay s.r.o. (8270)</option>
+                        <option value="56">B-Efekt a.s. (8280)</option>
+                        <option value="57">EUROPAY s.r.o. (8290)</option>
+                        <option value="58">Business Credit s.r.o. (8291)</option>
+                        <option value="59">Money Change s.r.o. (8292)</option>
+                        <option value="60">Mercurius partners s.r.o. (8293)</option>
+                        <option value="61">GrisPayUnion s.r.o. (8294)</option>
+                        <option value="62">NOVARED s.r.o. (8295)</option>
+                        <option value="63">PaySysEU s.r.o. (8296)</option>
+                        <option value="64">EUPSProvider s.r.o. (8297)</option>
+                        <option value="65">Andraste Capital s.r.o. (8298)</option>
+                    </select>
+                    <span class="field-validation-valid" data-valmsg-for="BankovniSpojeni.KodBanky"
+                        data-valmsg-replace="true"></span>
+                </div>
+                <h2>Evidence zemědělského podnikatele</h2>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <a
+                            title="Úřad obce s rozšířenou působností, který provedl zápis do evidence zemědělského podnikatele a o zápisu vydal osvědčení"><u><label
+                                    for="Evidence_EvidenceU"><span>U koho je podnikatel evidován
+                                        *</span></label></u></a>
+                        <input class="form-control text-box single-line" data-val="true"
+                            data-val-required="Není vyplněno, kde je podnikatel evidován" id="Evidence_EvidenceU"
+                            name="Evidence.EvidenceU" type="text" value="">
+                        <span class="field-validation-valid" data-valmsg-for="Evidence.EvidenceU"
+                            data-valmsg-replace="true"></span>
+                    </div>
+                    <div class="form-group col">
+                        <label for="Evidence_DatumVydaniEvidence"><span>Datum vydání osvědčení *</span></label>
+
+
+                        <input value="" data-val="true" data-val-date="The field Datum vydání osvědčení must be a date."
+                            data-val-datetimetodayorearlier="Zadejte datum ve formátu dd.mm.rrrr. Údaj nemůže být větší než-li je dnešní datum."
+                            data-val-required="Není vyplněno datum evidence" id="Evidence_DatumVydaniEvidence"
+                            name="Evidence.DatumVydaniEvidence" type="date">
+                        <span class="field-validation-valid" data-valmsg-for="Evidence.DatumVydaniEvidence"
+                            data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
             </fieldset>
+
             <div id="divCPuvery">
                 <fieldset class="fieldset">
                     <legend>Čestné prohlášení</legend>
